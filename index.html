@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="style.css" />
 
-    <script defer src="script.js"></script>
+    <!-- <script defer src="script.js"></script> -->
   </head>
   <body>
     <script type="module" src="/main.js"></script>
@@ -16,7 +16,7 @@
     <div class="container">
       <h1>Rock Paper Scissors Game</h1>
 
-      <h3>First who reaches score of three wins the game!</h3>
+      <h3 class="text">First who reaches score of three wins the game!</h3>
 
       <div class="player-cont">
         <p>Player Score: <span class="player-score">0</span></p>
@@ -24,12 +24,28 @@
       </div>
 
       <div class="img-container">
-        <img class="rock-pic" src="/rock.png" alt="rock image" />
-        <img class="paper-pic" src="/paper.png" alt="Paper image" />
-        <img class="scissors" src="/scissors.png" alt="scissors image" />
+        <img
+          class="rock-pic"
+          src="/rock.png"
+          alt="rock image"
+          data-choice="rock"
+        />
+        <img
+          class="paper-pic"
+          src="/paper.png"
+          alt="paper image"
+          data-choice="paper"
+        />
+        <img
+          class="scissors"
+          src="/scissors.png"
+          alt="scissors image"
+          data-choice="scissors"
+        />
       </div>
     </div>
 
+    <h3 class="winner hidden"></h3>
     <button class="start-btn">START GAME</button>
 
     <div class="overlay"></div>

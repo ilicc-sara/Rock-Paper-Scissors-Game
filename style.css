@@ -59,7 +59,6 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
 
   background-color: #000;
   z-index: 10;
@@ -91,4 +90,14 @@ img {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   z-index: 5;
+}
+
+.winner {
+  position: absolute;
+  z-index: 11;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: white;
+  font-size: 32px;
 }
