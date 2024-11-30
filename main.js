@@ -8,8 +8,6 @@ const playerScoreEl = document.querySelector(".player-score");
 const computerScoreEl = document.querySelector(".computer-score");
 const infoText = document.querySelector(".text");
 const images = document.querySelectorAll("img");
-console.log(playerScoreEl.textContent);
-console.log(computerScoreEl.textContent);
 
 let playerScore = 0;
 let computerScore = 0;
