@@ -16,7 +16,6 @@ let playerChioce;
 let computerChoice;
 
 const maxScore = 3;
-const choices = ["rock", "paper", "scissors"];
 
 const toggleOverlay = function () {
   startGame.classList.toggle("hidden");
@@ -57,14 +56,26 @@ const play = function () {
   }
 };
 
+const playComp = function () {
+  const choices = ["rock", "paper", "scissors"];
+
+  const getChoice = () => choices[Math.trunc(Math.random() * choices.length)];
+  return { getChoice };
+};
+
+const compChoice = playComp();
+console.log(compChoice.getChoice());
+compChoice.getChoice();
+
 images.forEach(function (el, i) {
   el.addEventListener("click", function (e) {
     playerChioce = e.target.dataset.choice;
     console.log(playerChioce);
 
-    computerChoice = choices[Math.trunc(Math.random() * choices.length)];
-    console.log(computerChoice);
-
+    computerChoice = compChoice.getChoice;
+    // console.log(computerChoice);
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
     if (playerChioce === computerChoice) {
       infoText.textContent = `You both choose ${computerChoice.toUpperCase()}!`;
     }
