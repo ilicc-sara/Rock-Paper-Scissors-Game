@@ -43,7 +43,8 @@ const play = function () {
   ) {
     playerScore++;
     playerScoreEl.textContent = playerScore;
-    infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!`;
+    infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}! 
+    PLAYER WON`;
   }
   if (
     (playerChioce === "rock" && computerChoice === "paper") ||
@@ -52,7 +53,8 @@ const play = function () {
   ) {
     computerScore++;
     computerScoreEl.textContent = computerScore;
-    infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!`;
+    infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!  
+    COMPUTER WON`;
   }
 };
 
@@ -65,17 +67,17 @@ const playComp = function () {
 
 const compChoice = playComp();
 console.log(compChoice.getChoice());
-compChoice.getChoice();
+// compChoice.getChoice();
 
 images.forEach(function (el, i) {
   el.addEventListener("click", function (e) {
     playerChioce = e.target.dataset.choice;
     console.log(playerChioce);
 
-    computerChoice = compChoice.getChoice;
+    // game.setCompChoice(compChoice.getChoice())
+    computerChoice = compChoice.getChoice();
+    // computerChoice = choices[Math.trunc(Math.random() * choices.length)];
     // console.log(computerChoice);
-    ///////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
     if (playerChioce === computerChoice) {
       infoText.textContent = `You both choose ${computerChoice.toUpperCase()}!`;
     }
