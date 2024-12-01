@@ -58,6 +58,15 @@ const play = function () {
   }
 };
 
+const game = function () {
+  const playerChioce = "";
+
+  const setPlayerChoice = (e) => e.target.dataset.choice;
+  return { getChoice, setPlayerChoice };
+};
+
+const gamePlay = game();
+
 const playComp = function () {
   const choices = ["rock", "paper", "scissors"];
 
@@ -71,8 +80,7 @@ console.log(compChoice.getChoice());
 
 images.forEach(function (el, i) {
   el.addEventListener("click", function (e) {
-    playerChioce = e.target.dataset.choice;
-    console.log(playerChioce);
+    playerChioce = gamePlay.setPlayerChoice(e);
 
     // game.setCompChoice(compChoice.getChoice())
     computerChoice = compChoice.getChoice();
