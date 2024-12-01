@@ -59,35 +59,28 @@ const play = function () {
 };
 
 const game = function () {
-  const playerChioce = "";
+  const choices = ["rock", "paper", "scissors"];
 
+  const getCompChoice = () =>
+    choices[Math.trunc(Math.random() * choices.length)];
   const setPlayerChoice = (e) => e.target.dataset.choice;
-  return { getChoice, setPlayerChoice };
+  return { getCompChoice, setPlayerChoice };
 };
 
 const gamePlay = game();
-
-const playComp = function () {
-  const choices = ["rock", "paper", "scissors"];
-
-  const getChoice = () => choices[Math.trunc(Math.random() * choices.length)];
-  return { getChoice };
-};
-
-const compChoice = playComp();
-console.log(compChoice.getChoice());
-// compChoice.getChoice();
 
 images.forEach(function (el, i) {
   el.addEventListener("click", function (e) {
     playerChioce = gamePlay.setPlayerChoice(e);
 
     // game.setCompChoice(compChoice.getChoice())
-    computerChoice = compChoice.getChoice();
+    computerChoice = gamePlay.getCompChoice();
     // computerChoice = choices[Math.trunc(Math.random() * choices.length)];
     // console.log(computerChoice);
-    if (playerChioce === computerChoice) {
-      infoText.textContent = `You both choose ${computerChoice.toUpperCase()}!`;
+    if (gamePlay.setPlayerChoice(e) === gamePlay.getCompChoice()) {
+      infoText.textContent = `You both choose ${gamePlay
+        .getCompChoice()
+        .toUpperCase()}!`;
     }
 
     play();
