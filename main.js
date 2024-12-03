@@ -92,23 +92,23 @@ images.forEach(function (el, i) {
     //     .toUpperCase()}!`;
     // }
 
-    // if (playerScore === maxScore || computerScore === maxScore) {
-    //   if (playerScore === maxScore) {
-    //     winner.textContent = "You won the game!";
-    //     winner.style.color = "green";
-    //   } else {
-    //     winner.textContent = "You lost the game!";
-    //     winner.style.color = "red";
-    //   }
-    //   toggleOverlay();
-    //   winner.classList.remove("hidden");
-    //   startGame.textContent = "TRY AGAIN";
+    if (playerScore === maxScore || computerScore === maxScore) {
+      if (playerScore === maxScore) {
+        winner.textContent = "You won the game!";
+        winner.style.color = "green";
+      } else {
+        winner.textContent = "You lost the game!";
+        winner.style.color = "red";
+      }
+      toggleOverlay();
+      winner.classList.remove("hidden");
+      startGame.textContent = "TRY AGAIN";
 
-    //   infoText.textContent = "First who reaches score of three wins the game!";
-    //   playerScore = 0;
-    //   computerScore = 0;
-    //   playerScoreEl.textContent = 0;
-    //   computerScoreEl.textContent = 0;
-    // }
+      infoText.textContent = "First who reaches score of three wins the game!";
+      playerScore = 0;
+      computerScore = 0;
+      playerScoreEl.textContent = 0;
+      computerScoreEl.textContent = 0;
+    }
   });
 });
