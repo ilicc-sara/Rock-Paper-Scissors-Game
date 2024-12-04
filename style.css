@@ -28,6 +28,16 @@ h1 {
   font-size: 50px;
 }
 
+.text {
+  margin-bottom: 30px;
+}
+
+.text-1 {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 15px;
+}
+
 .player-cont {
   margin: 50px 0;
   display: flex;

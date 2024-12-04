@@ -7,6 +7,7 @@ const winner = document.querySelector(".winner");
 const playerScoreEl = document.querySelector(".player-score");
 const computerScoreEl = document.querySelector(".computer-score");
 const infoText = document.querySelector(".text");
+const infoText1 = document.querySelector(".text-1");
 const images = document.querySelectorAll("img");
 
 const maxScore = 3;
@@ -53,55 +54,49 @@ const gameCreator = function () {
 };
 
 const game = gameCreator();
-// const ui = uiControlerCreator()
+
+const uiControlerCreator = function () {
+  const displayPlayerScore = (value) => (playerScoreEl.textContent = value);
+  const displayCompScore = (value) => (computerScoreEl.textContent = value);
+
+  const displayInfo = (value) =>
+    (infoText.textContent = `Computer choice is ${value.toUpperCase()}`);
+
+  const displayScore = (value) =>
+    (infoText1.textContent = `${value} got the score!`);
+
+  const displayWinner = () => {
+    toggleOverlay();
+    winner.classList.remove("hidden");
+    startGame.textContent = "TRY AGAIN!";
+  };
+
+  // prettier-ignore
+  return { displayCompScore, displayPlayerScore, displayInfo, displayScore, displayWinner };
+};
+
+const ui = uiControlerCreator();
 
 const play = function () {
-  game.getPlayerChoice();
-  game.getCompChoice();
   if (
-    (game.getPlayerChoice() === "rock" &&
-      game.getCompChoice() === "scissors") ||
+    // prettier-ignore
+    (game.getPlayerChoice() === "rock" && game.getCompChoice() === "scissors") ||
     (game.getPlayerChoice() === "paper" && game.getCompChoice() === "rock") ||
     (game.getPlayerChoice() === "scissors" && game.getCompChoice() === "paper")
   ) {
     game.incrPlayerScore();
-    console.log("START");
-    console.log("player choice:", game.getPlayerChoice());
-    console.log("computer choice:", game.getCompChoice());
-    console.log("player score:", game.getPlayerScore());
-    console.log("comp score:", game.getCompScore());
-    console.log("END");
-    // playerScoreEl.textContent = playerScore;
-    // infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!
-    // PLAYER WON`;
-  }
-  if (
-    (game.getPlayerChoice() === "rock" && game.getCompChoice() === "paper") ||
-    (game.getPlayerChoice() === "paper" &&
-      game.getCompChoice() === "scissors") ||
-    (game.getPlayerChoice() === "scissors" && game.getCompChoice() === "rock")
-  ) {
+    ui.displayPlayerScore(game.getPlayerScore());
+    ui.displayInfo(game.getCompChoice());
+    ui.displayScore("PLAYER");
+  } else if (game.getPlayerChoice() === game.getCompChoice()) {
+    ui.displayInfo("the same");
+    ui.displayScore("Nobody");
+  } else {
     game.incrCompScore();
-    console.log("START");
-    console.log("player choice:", game.getPlayerChoice());
-    console.log("computer choice:", game.getCompChoice());
-    console.log("player score:", game.getPlayerScore());
-    console.log("comp score:", game.getCompScore());
-    console.log("END");
-    // computerScoreEl.textContent = computerScore;
-    // infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!
-    // COMPUTER WON`;
+    ui.displayCompScore(game.getCompScore());
+    ui.displayInfo(game.getCompChoice());
+    ui.displayScore("COMPUTER");
   }
-  if (game.getPlayerChoice() === game.getCompChoice()) {
-    console.log("START");
-    console.log("player choice:", game.getPlayerChoice());
-    console.log("computer choice:", game.getCompChoice());
-    console.log("END");
-  }
-};
-const uiControlerCreator = function () {
-  playerScoreEl.textContent = game.getPlayerScore();
-  computerScoreEl.textContent = game.getCompScore();
 };
 
 images.forEach(function (el, i) {
@@ -109,6 +104,14 @@ images.forEach(function (el, i) {
     game.setPlayerChoice(e.target.dataset.choice);
     game.setCompChoice();
     play();
-    uiControlerCreator();
+
+    if (game.getPlayerScore() === maxScore) {
+      ui.displayWinner("won");
+      winner.style.color = "green";
+    }
+    if (game.getPlayerScore() === maxScore) {
+      ui.displayWinner("lost");
+      winner.style.color = "red";
+    }
   });
 });
