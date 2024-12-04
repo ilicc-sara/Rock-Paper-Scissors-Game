@@ -50,6 +50,13 @@ img {
   height: 175px;
 }
 
+img:hover {
+  /* border: 1px solid white; */
+  border-radius: 30px;
+  transform: scale(1.1);
+  transition: all 0.4;
+}
+
 .hidden {
   display: none;
 }

@@ -9,12 +9,6 @@ const computerScoreEl = document.querySelector(".computer-score");
 const infoText = document.querySelector(".text");
 const images = document.querySelectorAll("img");
 
-// let playerScore = 0;
-// let computerScore = 0;
-
-// let playerChioce;
-// let computerChoice;
-
 const maxScore = 3;
 
 const toggleOverlay = function () {
@@ -61,8 +55,6 @@ const gameCreator = function () {
 const game = gameCreator();
 // const ui = uiControlerCreator()
 
-const uiControlerCreator = function () {};
-
 const play = function () {
   game.getPlayerChoice();
   game.getCompChoice();
@@ -107,41 +99,16 @@ const play = function () {
     console.log("END");
   }
 };
+const uiControlerCreator = function () {
+  playerScoreEl.textContent = game.getPlayerScore();
+  computerScoreEl.textContent = game.getCompScore();
+};
 
 images.forEach(function (el, i) {
   el.addEventListener("click", function (e) {
     game.setPlayerChoice(e.target.dataset.choice);
     game.setCompChoice();
     play();
-    // playerChioce = gamePlay.setPlayerChoice(e);
-    // console.log(game.getPlayerChoice());
-    // console.log(game.getCompChoice());
-
-    // game.setCompChoice(compChoice.getChoice())
-
-    // if (gamePlay.setPlayerChoice(e) === gamePlay.getCompChoice()) {
-    //   infoText.textContent = `You both choose ${gamePlay
-    //     .getCompChoice()
-    //     .toUpperCase()}!`;
-    // }
-
-    // if (playerScore === maxScore || computerScore === maxScore) {
-    //   if (playerScore === maxScore) {
-    //     winner.textContent = "You won the game!";
-    //     winner.style.color = "green";
-    //   } else {
-    //     winner.textContent = "You lost the game!";
-    //     winner.style.color = "red";
-    //   }
-    //   toggleOverlay();
-    //   winner.classList.remove("hidden");
-    //   startGame.textContent = "TRY AGAIN";
-
-    //   infoText.textContent = "First who reaches score of three wins the game!";
-    //   playerScore = 0;
-    //   computerScore = 0;
-    //   playerScoreEl.textContent = 0;
-    //   computerScoreEl.textContent = 0;
-    // }
+    uiControlerCreator();
   });
 });
