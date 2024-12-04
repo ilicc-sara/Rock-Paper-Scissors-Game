@@ -9,11 +9,11 @@ const computerScoreEl = document.querySelector(".computer-score");
 const infoText = document.querySelector(".text");
 const images = document.querySelectorAll("img");
 
-let playerScore = 0;
-let computerScore = 0;
+// let playerScore = 0;
+// let computerScore = 0;
 
 // let playerChioce;
-let computerChoice;
+// let computerChoice;
 
 const maxScore = 3;
 
@@ -42,8 +42,8 @@ const gameCreator = function () {
   let compScore = 0;
   let playerScore = 0;
 
-  const setCompChoice = () =>
-    (compChoice = choices[Math.trunc(Math.random() * choices.length)]);
+  // prettier-ignore
+  const setCompChoice = () => (compChoice = choices[Math.trunc(Math.random() * choices.length)]);
   const setPlayerChoice = (value) => (playerChioce = value);
   const getPlayerChoice = () => playerChioce;
   const getCompChoice = () => compChoice;
@@ -54,22 +54,18 @@ const gameCreator = function () {
   const incrCompScore = () => (compScore += 1);
   const incrPlayerScore = () => (playerScore += 1);
 
-  return {
-    getPlayerChoice,
-    setPlayerChoice,
-    setCompChoice,
-    getCompChoice,
-    getCompScore,
-    getPlayerScore,
-    incrCompScore,
-    incrPlayerScore,
-  };
+  // prettier-ignore
+  return {getPlayerChoice, setPlayerChoice, setCompChoice, getCompChoice, getCompScore, getPlayerScore, incrCompScore, incrPlayerScore };
 };
 
 const game = gameCreator();
 // const ui = uiControlerCreator()
 
+const uiControlerCreator = function () {};
+
 const play = function () {
+  game.getPlayerChoice();
+  game.getCompChoice();
   if (
     (game.getPlayerChoice() === "rock" &&
       game.getCompChoice() === "scissors") ||
@@ -77,8 +73,12 @@ const play = function () {
     (game.getPlayerChoice() === "scissors" && game.getCompChoice() === "paper")
   ) {
     game.incrPlayerScore();
-    console.log(game.getCompScore());
-    console.log(game.getPlayerScore());
+    console.log("START");
+    console.log("player choice:", game.getPlayerChoice());
+    console.log("computer choice:", game.getCompChoice());
+    console.log("player score:", game.getPlayerScore());
+    console.log("comp score:", game.getCompScore());
+    console.log("END");
     // playerScoreEl.textContent = playerScore;
     // infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!
     // PLAYER WON`;
@@ -90,24 +90,32 @@ const play = function () {
     (game.getPlayerChoice() === "scissors" && game.getCompChoice() === "rock")
   ) {
     game.incrCompScore();
-    console.log(game.getCompScore());
-    console.log(game.getPlayerScore());
-    // game.getCompScore() += 1;
+    console.log("START");
+    console.log("player choice:", game.getPlayerChoice());
+    console.log("computer choice:", game.getCompChoice());
+    console.log("player score:", game.getPlayerScore());
+    console.log("comp score:", game.getCompScore());
+    console.log("END");
     // computerScoreEl.textContent = computerScore;
     // infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!
     // COMPUTER WON`;
+  }
+  if (game.getPlayerChoice() === game.getCompChoice()) {
+    console.log("START");
+    console.log("player choice:", game.getPlayerChoice());
+    console.log("computer choice:", game.getCompChoice());
+    console.log("END");
   }
 };
 
 images.forEach(function (el, i) {
   el.addEventListener("click", function (e) {
+    game.setPlayerChoice(e.target.dataset.choice);
+    game.setCompChoice();
     play();
     // playerChioce = gamePlay.setPlayerChoice(e);
-    game.setPlayerChoice(e.target.dataset.choice);
-
-    game.setCompChoice();
-    console.log(game.getPlayerChoice());
-    console.log(game.getCompChoice());
+    // console.log(game.getPlayerChoice());
+    // console.log(game.getCompChoice());
 
     // game.setCompChoice(compChoice.getChoice())
 
