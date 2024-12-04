@@ -35,29 +35,6 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-const play = function () {
-  if (
-    (game.getPlayerChoice() === "rock" && computerChoice === "scissors") ||
-    (playerChioce === "paper" && computerChoice === "rock") ||
-    (playerChioce === "scissors" && computerChoice === "paper")
-  ) {
-    playerScore++;
-    playerScoreEl.textContent = playerScore;
-    infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}! 
-    PLAYER WON`;
-  }
-  if (
-    (playerChioce === "rock" && computerChoice === "paper") ||
-    (playerChioce === "paper" && computerChoice === "scissors") ||
-    (playerChioce === "scissors" && computerChoice === "rock")
-  ) {
-    computerScore++;
-    computerScoreEl.textContent = computerScore;
-    infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!  
-    COMPUTER WON`;
-  }
-};
-
 const gameCreator = function () {
   const choices = ["rock", "paper", "scissors"];
   let compChoice = "";
@@ -71,19 +48,67 @@ const gameCreator = function () {
   const getPlayerChoice = () => playerChioce;
   const getCompChoice = () => compChoice;
 
-  return { getPlayerChoice, setPlayerChoice, setCompChoice, getCompChoice };
+  const getCompScore = () => compScore;
+  const getPlayerScore = () => playerScore;
+
+  const incrCompScore = () => (compScore += 1);
+  const incrPlayerScore = () => (playerScore += 1);
+
+  return {
+    getPlayerChoice,
+    setPlayerChoice,
+    setCompChoice,
+    getCompChoice,
+    getCompScore,
+    getPlayerScore,
+    incrCompScore,
+    incrPlayerScore,
+  };
 };
 
 const game = gameCreator();
 // const ui = uiControlerCreator()
+
+const play = function () {
+  if (
+    (game.getPlayerChoice() === "rock" &&
+      game.getCompChoice() === "scissors") ||
+    (game.getPlayerChoice() === "paper" && game.getCompChoice() === "rock") ||
+    (game.getPlayerChoice() === "scissors" && game.getCompChoice() === "paper")
+  ) {
+    game.incrPlayerScore();
+    console.log(game.getCompScore());
+    console.log(game.getPlayerScore());
+    // playerScoreEl.textContent = playerScore;
+    // infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!
+    // PLAYER WON`;
+  }
+  if (
+    (game.getPlayerChoice() === "rock" && game.getCompChoice() === "paper") ||
+    (game.getPlayerChoice() === "paper" &&
+      game.getCompChoice() === "scissors") ||
+    (game.getPlayerChoice() === "scissors" && game.getCompChoice() === "rock")
+  ) {
+    game.incrCompScore();
+    console.log(game.getCompScore());
+    console.log(game.getPlayerScore());
+    // game.getCompScore() += 1;
+    // computerScoreEl.textContent = computerScore;
+    // infoText.textContent = `Computer choice is ${computerChoice.toUpperCase()}!
+    // COMPUTER WON`;
+  }
+};
+
 images.forEach(function (el, i) {
   el.addEventListener("click", function (e) {
+    play();
     // playerChioce = gamePlay.setPlayerChoice(e);
     game.setPlayerChoice(e.target.dataset.choice);
 
     game.setCompChoice();
     console.log(game.getPlayerChoice());
     console.log(game.getCompChoice());
+
     // game.setCompChoice(compChoice.getChoice())
 
     // if (gamePlay.setPlayerChoice(e) === gamePlay.getCompChoice()) {
@@ -92,23 +117,23 @@ images.forEach(function (el, i) {
     //     .toUpperCase()}!`;
     // }
 
-    if (playerScore === maxScore || computerScore === maxScore) {
-      if (playerScore === maxScore) {
-        winner.textContent = "You won the game!";
-        winner.style.color = "green";
-      } else {
-        winner.textContent = "You lost the game!";
-        winner.style.color = "red";
-      }
-      toggleOverlay();
-      winner.classList.remove("hidden");
-      startGame.textContent = "TRY AGAIN";
+    // if (playerScore === maxScore || computerScore === maxScore) {
+    //   if (playerScore === maxScore) {
+    //     winner.textContent = "You won the game!";
+    //     winner.style.color = "green";
+    //   } else {
+    //     winner.textContent = "You lost the game!";
+    //     winner.style.color = "red";
+    //   }
+    //   toggleOverlay();
+    //   winner.classList.remove("hidden");
+    //   startGame.textContent = "TRY AGAIN";
 
-      infoText.textContent = "First who reaches score of three wins the game!";
-      playerScore = 0;
-      computerScore = 0;
-      playerScoreEl.textContent = 0;
-      computerScoreEl.textContent = 0;
-    }
+    //   infoText.textContent = "First who reaches score of three wins the game!";
+    //   playerScore = 0;
+    //   computerScore = 0;
+    //   playerScoreEl.textContent = 0;
+    //   computerScoreEl.textContent = 0;
+    // }
   });
 });
