@@ -49,8 +49,10 @@ const gameCreator = function () {
   const incrCompScore = () => (compScore += 1);
   const incrPlayerScore = () => (playerScore += 1);
 
+  const resetPlayerScore = () => (playerScore = 0);
+  const resetCompScore = () => (compScore = 0);
   // prettier-ignore
-  return {getPlayerChoice, setPlayerChoice, setCompChoice, getCompChoice, getCompScore, getPlayerScore, incrCompScore, incrPlayerScore };
+  return {getPlayerChoice, setPlayerChoice, setCompChoice, getCompChoice, getCompScore, getPlayerScore, incrCompScore, incrPlayerScore, resetPlayerScore, resetCompScore };
 };
 
 const game = gameCreator();
@@ -60,10 +62,10 @@ const uiControlerCreator = function () {
   const displayCompScore = (value) => (computerScoreEl.textContent = value);
 
   const displayInfo = (value) =>
-    (infoText.textContent = `Computer choice is ${value.toUpperCase()}`);
+    (infoText.textContent = `Computer choice is ${value.toUpperCase()} !`);
 
   const displayScore = (value) =>
-    (infoText1.textContent = `${value} got the score!`);
+    (infoText1.textContent = `${value} got the score !`);
 
   const displayWinner = () => {
     toggleOverlay();
@@ -71,8 +73,15 @@ const uiControlerCreator = function () {
     startGame.textContent = "TRY AGAIN!";
   };
 
+  const updateUI = () => {
+    infoText.textContent = "First who reaches score of three wins the game!";
+    infoText1.innerHTML = `<span>&nbsp;</span>`;
+    ui.displayPlayerScore(game.getPlayerScore());
+    ui.displayCompScore(game.getCompScore());
+  };
+
   // prettier-ignore
-  return { displayCompScore, displayPlayerScore, displayInfo, displayScore, displayWinner };
+  return { displayCompScore, displayPlayerScore, displayInfo, displayScore, displayWinner, updateUI };
 };
 
 const ui = uiControlerCreator();
@@ -106,12 +115,20 @@ images.forEach(function (el, i) {
     play();
 
     if (game.getPlayerScore() === maxScore) {
-      ui.displayWinner("won");
+      ui.displayWinner();
+      winner.textContent = "You won the game!";
       winner.style.color = "green";
+      game.resetPlayerScore();
+      game.resetCompScore();
+      ui.updateUI();
     }
-    if (game.getPlayerScore() === maxScore) {
-      ui.displayWinner("lost");
+    if (game.getCompScore() === maxScore) {
+      ui.displayWinner();
+      winner.textContent = "You lost the game!";
       winner.style.color = "red";
+      game.resetCompScore();
+      game.resetPlayerScore();
+      ui.updateUI();
     }
   });
 });
