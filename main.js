@@ -73,18 +73,17 @@ const uiControlerCreator = function () {
     startGame.textContent = "TRY AGAIN!";
   };
 
-  const updateUI = () => {
-    infoText.textContent = "First who reaches score of three wins the game!";
-    infoText1.innerHTML = `<span>&nbsp;</span>`;
-    ui.displayPlayerScore(game.getPlayerScore());
-    ui.displayCompScore(game.getCompScore());
-  };
-
   // prettier-ignore
-  return { displayCompScore, displayPlayerScore, displayInfo, displayScore, displayWinner, updateUI };
+  return { displayCompScore, displayPlayerScore, displayInfo, displayScore, displayWinner};
 };
 
 const ui = uiControlerCreator();
+const updateUI = () => {
+  infoText.textContent = "First who reaches score of three wins the game!";
+  infoText1.innerHTML = `<span>&nbsp;</span>`;
+  ui.displayPlayerScore(game.getPlayerScore());
+  ui.displayCompScore(game.getCompScore());
+};
 
 const play = function () {
   if (
@@ -120,7 +119,7 @@ images.forEach(function (el, i) {
       winner.style.color = "green";
       game.resetPlayerScore();
       game.resetCompScore();
-      ui.updateUI();
+      updateUI();
     }
     if (game.getCompScore() === maxScore) {
       ui.displayWinner();
@@ -128,7 +127,7 @@ images.forEach(function (el, i) {
       winner.style.color = "red";
       game.resetCompScore();
       game.resetPlayerScore();
-      ui.updateUI();
+      updateUI();
     }
   });
 });
