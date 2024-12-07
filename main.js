@@ -134,11 +134,6 @@ images.forEach(function (el, i) {
       game.getPlayerScore() === maxScore ||
       game.getCompScore() === maxScore
     ) {
-      ui.displayWinner();
-      game.resetCompScore();
-      game.resetPlayerScore();
-      updateUI();
-
       if (game.getPlayerScore() === maxScore) {
         winner.textContent = "You won the game!";
         winner.style.color = "green";
@@ -146,6 +141,10 @@ images.forEach(function (el, i) {
         winner.textContent = "You lost the game!";
         winner.style.color = "red";
       }
+      ui.displayWinner();
+      game.resetCompScore();
+      game.resetPlayerScore();
+      updateUI();
     }
   });
 });
