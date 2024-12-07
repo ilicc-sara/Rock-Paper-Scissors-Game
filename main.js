@@ -113,21 +113,39 @@ images.forEach(function (el, i) {
     game.setCompChoice();
     play();
 
-    if (game.getPlayerScore() === maxScore) {
+    // if (game.getPlayerScore() === maxScore) {
+    //   ui.displayWinner();
+    //   winner.textContent = "You won the game!";
+    //   winner.style.color = "green";
+    //   game.resetPlayerScore();
+    //   game.resetCompScore();
+    //   updateUI();
+    // }
+    // if (game.getCompScore() === maxScore) {
+    //   ui.displayWinner();
+    //   winner.textContent = "You lost the game!";
+    //   winner.style.color = "red";
+    //   game.resetCompScore();
+    //   game.resetPlayerScore();
+    //   updateUI();
+    // }
+
+    if (
+      game.getPlayerScore() === maxScore ||
+      game.getCompScore() === maxScore
+    ) {
       ui.displayWinner();
-      winner.textContent = "You won the game!";
-      winner.style.color = "green";
-      game.resetPlayerScore();
-      game.resetCompScore();
-      updateUI();
-    }
-    if (game.getCompScore() === maxScore) {
-      ui.displayWinner();
-      winner.textContent = "You lost the game!";
-      winner.style.color = "red";
       game.resetCompScore();
       game.resetPlayerScore();
       updateUI();
+
+      if (game.getPlayerScore() === maxScore) {
+        winner.textContent = "You won the game!";
+        winner.style.color = "green";
+      } else if (game.getCompScore() === maxScore) {
+        winner.textContent = "You lost the game!";
+        winner.style.color = "red";
+      }
     }
   });
 });
